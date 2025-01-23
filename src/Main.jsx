@@ -1,12 +1,16 @@
 import React from "react"
+import IngredientsList from "./components/IngredientsList"
+import ClaudeRecipe from "./components/ClaudeRecipe"
 
 export default function Main() {
+    const [ingredients, setIngredients] = React.useState(
+        ["all the main spices", "pasta", "ground beef", "tomato paste"]
+    )
+    const [recipeShown, setRecipeShown] = React.useState(false)
 
-    const [ingredients, setIngredients] = React.useState([])
-
-    const ingredientsListItems = ingredients.map(ingredient => (
-        <li key={ingredient}>{ingredient}</li>
-    ))
+    function toggleRecipeShown() {
+        setRecipeShown(prevShown => !prevShown)
+    }
 
     function addIngredient(event) {
         event.preventDefault();
@@ -14,7 +18,6 @@ export default function Main() {
         const newIngredient = event.target.elements.ingredient.value;
         setIngredients([...ingredients, newIngredient]);
       }
-
 
     return (
         <main>
@@ -27,17 +30,15 @@ export default function Main() {
                 />
                 <button>Add ingredient</button>
             </form>
-            {ingredients.length > 0 && <section>
-                <h2>Ingredients on hand:</h2>
-                <ul className="ingredients-list" aria-live="polite">{ingredientsListItems}</ul>
-                {ingredients.length > 3 && <div className="get-recipe-container">
-                    <div>
-                        <h3>Ready for a recipe?</h3>
-                        <p>Generate a recipe from your list of ingredients.</p>
-                    </div>
-                    <button>Get a recipe</button>
-                </div>}
-            </section>}
+
+            {ingredients.length > 0 &&
+                <IngredientsList
+                    ingredients={ingredients}
+                    toggleRecipeShown={toggleRecipeShown}
+                />
+            }
+
+            {recipeShown && <ClaudeRecipe />}
         </main>
     )
 }
