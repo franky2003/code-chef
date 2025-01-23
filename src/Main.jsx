@@ -8,16 +8,17 @@ export default function Main() {
         <li key={ingredient}>{ingredient}</li>
     ))
 
-    function handleSubmit(event) {
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
-        const newIngredient = formData.get("ingredient")
-        setIngredients(prevIngredients => [...prevIngredients, newIngredient])
-    }
+    function addIngredient(event) {
+        event.preventDefault();
+        console.log(event)
+        const newIngredient = event.target.elements.ingredient.value;
+        setIngredients([...ingredients, newIngredient]);
+      }
+
 
     return (
         <main>
-            <form onSubmit={handleSubmit} className="add-ingredient-form">
+            <form onSubmit={addIngredient} className="add-ingredient-form">
                 <input
                     type="text"
                     placeholder="e.g. oregano"
@@ -26,9 +27,17 @@ export default function Main() {
                 />
                 <button>Add ingredient</button>
             </form>
-            <ul>
-                {ingredientsListItems}
-            </ul>
+            {ingredients.length > 0 && <section>
+                <h2>Ingredients on hand:</h2>
+                <ul className="ingredients-list" aria-live="polite">{ingredientsListItems}</ul>
+                {ingredients.length > 3 && <div className="get-recipe-container">
+                    <div>
+                        <h3>Ready for a recipe?</h3>
+                        <p>Generate a recipe from your list of ingredients.</p>
+                    </div>
+                    <button>Get a recipe</button>
+                </div>}
+            </section>}
         </main>
     )
 }
