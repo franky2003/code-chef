@@ -104,3 +104,54 @@ ul.ingredients-list > li {
   font-size: 0.875rem;
   cursor: pointer;
 }
+
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  header > img {
+    width: 40px;
+  }
+
+  main {
+    padding: 20px 15px;
+  }
+
+  .add-ingredient-form {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+  }
+
+  .add-ingredient-form > input {
+    max-width: 100%;
+  }
+
+  .add-ingredient-form > button {
+    width: 100%;
+  }
+
+  .get-recipe-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .get-recipe-container h3 {
+    font-size: 1rem;
+  }
+
+  .get-recipe-container p {
+    font-size: 0.8rem;
+  }
+
+  .get-recipe-container button {
+    width: 100%;
+    text-align: center;
+  }
+}
